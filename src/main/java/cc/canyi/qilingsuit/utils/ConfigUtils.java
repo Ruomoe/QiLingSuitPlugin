@@ -26,6 +26,9 @@ public class ConfigUtils {
         File file = new File(QiLingSuitPlugin.getRoot(), "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
+        //check debug mode.
+        QiLingSuitPlugin.setDebug(config.getBoolean("DebugMode"));
+
         QiLingSuitPlugin.setCheckTime(config.getLong("CheckPlayerEquipTime", 100));
 
         for(String suitConfigName : config.getConfigurationSection("Suit").getKeys(false)) {

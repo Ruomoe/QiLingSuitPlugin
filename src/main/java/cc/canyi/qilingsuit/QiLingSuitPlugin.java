@@ -22,6 +22,7 @@ public class QiLingSuitPlugin extends JavaPlugin {
     @Getter
     private static String root;
     @Getter
+    @Setter
     private static boolean debug;
     @Getter
     @Setter
@@ -42,8 +43,6 @@ public class QiLingSuitPlugin extends JavaPlugin {
         root = this.getDataFolder().getAbsolutePath();
         this.saveDefaultConfig();
 
-        //check debug mode.
-        debug = this.getConfig().getBoolean("DebugMode");
 
         //init buff HashMap
         AttrStringUtils.initBuffHashMap();

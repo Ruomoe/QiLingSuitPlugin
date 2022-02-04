@@ -15,10 +15,10 @@ public class QiLingSuitListener implements Listener {
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity entity = event.getEntity();
         Entity entity_damager = event.getDamager();
-        Player player;
+
         if(entity instanceof Player) {
             //玩家被攻击
-            player = (Player) entity;
+            Player player = (Player) entity;
             PlayerSuitUpdateTask.Cache cache = PlayerSuitUpdateTask.getFactory_cache().get(player);
             if(cache != null) {
                 for(Suit suit : cache.getPlayerEquipSuitMap().keySet()) {
@@ -39,9 +39,10 @@ public class QiLingSuitListener implements Listener {
                     }
                 }
             }
-        }else if(entity_damager instanceof Player) {
+        }
+        if(entity_damager instanceof Player) {
             //玩家攻击
-            player = (Player) entity_damager;
+            Player player = (Player) entity_damager;
             PlayerSuitUpdateTask.Cache cache = PlayerSuitUpdateTask.getFactory_cache().get(player);
             if(cache != null) {
                 for(Suit suit : cache.getPlayerEquipSuitMap().keySet()) {
