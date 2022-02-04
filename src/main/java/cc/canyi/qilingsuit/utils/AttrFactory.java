@@ -65,7 +65,7 @@ public class AttrFactory {
      */
     public AttrFactory buildLoreOrEffect() {
         if (type == null) return this;
-        System.out.println("获取到 " + type);
+        //System.out.println("获取到 " + type);
         if (Arrays.asList("BIGATTR", "SX", "AP").contains(type)) {
             lore = str.substring(type.length() + 2);
         } else if (type.equals("BUFF")) {
