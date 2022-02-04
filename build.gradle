@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+apply plugin: 'com.github.johnrengelman.shadow'
+group 'cc.canyi'
+version '1.0-BETA'
+
+repositories {
+    mavenCentral()
+    maven { url = "https://repo.spongepowered.org/maven" }
+}
+sourceSets {
+    main {
+        ext.refMap = "mixins.qilingsuit.refmap.json"
+    }
+}
+
+dependencies {
+    //implementation 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    //annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+    compileOnly files('libs/bukkit-latest.jar')
+    compileOnly files('libs/BigAttributeVReload-1.0.jar')
+    compileOnly files('libs/AttributePlus.jar')
+    compileOnly files('libs/SX-Attribute.jar')
+}
+
+test {
+    useJUnitPlatform()
+}
+shadowJar {
+    /*
+    classifier = ""
+    dependencies {
+        include(dependency('org.spongepowered:mixin:0.7.11-SNAPSHOT'))
+    }
+
+     */
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
