@@ -14,4 +14,5 @@ public class Suit {
     private HashMap<String, String> partNeedLoreMap;
     private boolean extendsAttr;
     private HashMap<Integer, List<String>> attrStrMap;
+
 }

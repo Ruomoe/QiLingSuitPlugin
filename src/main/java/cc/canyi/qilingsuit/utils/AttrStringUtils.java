@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class AttrStringUtils {
     @Getter
@@ -65,5 +66,17 @@ public class AttrStringUtils {
         }else{
             return 0.0;
         }
+    }
+
+    /**
+     * 去除config中属性的[SX] [AP] [BUFF] 等前缀
+     * @param attrs 需要去除前缀的属性列表
+     * @return 已经去除前缀的属性列表
+     */
+    public static List<String> getNotPrefixStrList(List<String> attrs) {
+        return attrs.stream().map(attr -> {
+            if(attr.contains("[") && attr.contains("]")) return attr.replace(attr.substring(attr.indexOf("["), attr.indexOf("]") + 1), "");
+            else return attr;
+        }).collect(Collectors.toList());
     }
 }

@@ -3,14 +3,28 @@ package cc.canyi.qilingsuit.task;
 import cc.canyi.qilingsuit.QiLingSuitPlugin;
 import cc.canyi.qilingsuit.suit.Suit;
 import cc.canyi.qilingsuit.utils.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.serverct.ersha.jd.C;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class PlayerSuitUpdateTask implements Runnable {
+    @Getter
+    private static final HashMap<Player, Cache> factory_cache = new HashMap<>();
+
+    @AllArgsConstructor
+    @Data
+    public static class Cache {
+        private HashMap<Suit, List<String>> playerEquipSuitMap;
+        private AttrFactory factory;
+    }
+
     @Setter
     @Getter
     private boolean over = false;
@@ -42,6 +56,8 @@ public class PlayerSuitUpdateTask implements Runnable {
             if(!factory.getBigAttrList().isEmpty()) AttrUtils.addBigAttr(player, factory);
             if(!factory.getSxAttrList().isEmpty()) AttrUtils.addSX(player, factory);
 
+            //缓存用于读取目前玩家的套装加成
+            factory_cache.put(player, new Cache(playerEquipSuitMap, factory));
         });
     }
 }
