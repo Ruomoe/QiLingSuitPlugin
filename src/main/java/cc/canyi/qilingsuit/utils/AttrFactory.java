@@ -65,12 +65,14 @@ public class AttrFactory {
      */
     public AttrFactory buildLoreOrEffect() {
         if (type == null) return this;
+        System.out.println("获取到 " + type);
         if (Arrays.asList("BIGATTR", "SX", "AP").contains(type)) {
             lore = str.substring(type.length() + 2);
         } else if (type.equals("BUFF")) {
             String effectName = str.substring(type.length() + 2);
-            if (AttrStringUtils.getBuffNames().contains(effectName)) {
-                PotionEffectType type = AttrStringUtils.getBuffMap().get(effectName);
+            String buffName = effectName.substring(0, effectName.length() - 1);
+            if (AttrStringUtils.getBuffNames().contains(buffName)) {
+                PotionEffectType type = AttrStringUtils.getBuffMap().get(buffName);
                 int level = Math.max((int) AttrStringUtils.getLoreHasNumber(str) - 1, 0);
                 effect = new PotionEffect(type, 100, level);
             }
@@ -109,7 +111,6 @@ public class AttrFactory {
                 return returnSelfAndSetResult(false);
             }
             case "AP": {
-
                 if (PluginUtils.pluginIsActive("AttributePlus")) {
                     apAttrList.add(lore);
                     return returnSelfAndSetResult(true);

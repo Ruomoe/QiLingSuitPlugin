@@ -41,6 +41,7 @@ public class PlayerSuitUpdateTask implements Runnable {
             if(!factory.getApAttrList().isEmpty()) AttrUtils.addAP(player, factory);
             if(!factory.getBigAttrList().isEmpty()) AttrUtils.addBigAttr(player, factory);
             if(!factory.getSxAttrList().isEmpty()) AttrUtils.addSX(player, factory);
+
         });
     }
 }
