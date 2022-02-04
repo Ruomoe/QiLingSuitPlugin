@@ -53,9 +53,9 @@ public class QiLingSuitListener implements Listener {
                             suit.getPassives().getAttacked().forEach((command, percent) -> {
                                 if(percent / 100.0 >= QiLingSuitPlugin.getRandom().nextDouble()) {
                                     PlayerUtils.runCommand(player, command
-                                            .replace("<playerName>", player.getName()
-                                                    .replace("<suitName>", suit.getName())
-                                            ));
+                                            .replace("<playerName>", player.getName())
+                                            .replace("<suitName>", suit.getName())
+                                    );
                                 }
                             });
                         }

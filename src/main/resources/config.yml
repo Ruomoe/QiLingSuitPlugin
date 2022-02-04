@@ -71,9 +71,15 @@ Suit:
       4:
         - "[SX]生命上限 +50"
 
+#[console]开头表示后台执行 [op]开头表示以OP身份执行 什么都不加即玩家普通执行
 SuitPassives:
+  #套装config名称
   "test":
+    #被攻击时
     beAttack:
+      #'指令': 概率
       '[console]say 测试被攻击<playerName> <suitName>': 100
+    #主动攻击时
     attacked:
+      #'指令': 概率
       '[op]say 测试攻击<playerName> <suitName>': 100
