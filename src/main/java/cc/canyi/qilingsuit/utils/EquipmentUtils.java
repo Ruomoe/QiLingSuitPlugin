@@ -24,7 +24,7 @@ public class EquipmentUtils {
             int count = parts.size();
             if (suit.isExtendsAttr()) {
                 for(int i = 1; i <= count; i++) {
-                    List<String> attrStr = suit.getAttrStrMap().getOrDefault(count, null);
+                    List<String> attrStr = suit.getAttrStrMap().getOrDefault(i, null);
                     if (attrStr != null)
                         strAttrs.addAll(attrStr);
                 }
