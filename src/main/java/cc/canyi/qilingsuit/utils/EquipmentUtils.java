@@ -48,15 +48,20 @@ public class EquipmentUtils {
         for (int i = 0; i < 5; i++) {
             switch (i) {
                 case 0:
-                    stacks[i] = player.getEquipment().getHelmet();
+                    stacks[i] = player.getInventory().getHelmet();
+                    break;
                 case 1:
-                    stacks[i] = player.getEquipment().getChestplate();
+                    stacks[i] = player.getInventory().getChestplate();
+                    break;
                 case 2:
-                    stacks[i] = player.getEquipment().getLeggings();
+                    stacks[i] = player.getInventory().getLeggings();
+                    break;
                 case 3:
-                    stacks[i] = player.getEquipment().getBoots();
+                    stacks[i] = player.getInventory().getBoots();
+                    break;
                 case 4:
                     stacks[i] = player.getItemInHand();
+                    break;
             }
         }
         HashMap<Suit, List<String>> playerEquipSuitMap = new HashMap<>();

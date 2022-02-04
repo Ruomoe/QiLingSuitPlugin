@@ -15,4 +15,6 @@ public class Suit {
     private boolean extendsAttr;
     private HashMap<Integer, List<String>> attrStrMap;
 
+    private SuitPassives passives;
+
 }

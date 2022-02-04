@@ -2,6 +2,7 @@ package cc.canyi.qilingsuit;
 
 import cc.canyi.qilingsuit.api.QiLingSuitPapi;
 import cc.canyi.qilingsuit.command.QiLingSuitCommands;
+import cc.canyi.qilingsuit.listener.QiLingSuitListener;
 import cc.canyi.qilingsuit.task.PlayerSuitUpdateTask;
 import cc.canyi.qilingsuit.utils.AttrStringUtils;
 import cc.canyi.qilingsuit.utils.ConfigUtils;
@@ -10,6 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
+import java.util.Random;
 
 public class QiLingSuitPlugin extends JavaPlugin {
     @Getter
@@ -26,6 +30,9 @@ public class QiLingSuitPlugin extends JavaPlugin {
     @Getter
     @Setter
     private static PlayerSuitUpdateTask taskCache;
+
+    @Getter
+    private static final Random random = new Random();
 
     @Override
     public void onEnable() {
@@ -47,10 +54,13 @@ public class QiLingSuitPlugin extends JavaPlugin {
         //Register bukkit command
         Bukkit.getPluginCommand("qilingsuit").setExecutor(new QiLingSuitCommands());
 
+        //Register listener
+        Bukkit.getPluginManager().registerEvents(new QiLingSuitListener(), this);
+
         if(PluginUtils.pluginIsActive("PlaceholderAPI")) {
             //Loaded PlaceholderAPI
             boolean register = new QiLingSuitPapi().register();
-            Bukkit.getLogger().info("PlaceholderAPI hooked " + (register ? "success" : "failed"));
+            this.getLogger().info("PlaceholderAPI hooked " + (register ? "success" : "failed"));
         }
 
         this.getLogger().info("QiLingSuitPlugin Enabled.");
@@ -68,7 +78,6 @@ public class QiLingSuitPlugin extends JavaPlugin {
                 "§b                                   /____/                                                                           "
         );
         Bukkit.getConsoleSender().sendMessage(" ");
-
 
     }
 

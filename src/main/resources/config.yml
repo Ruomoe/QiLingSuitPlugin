@@ -70,3 +70,10 @@ Suit:
         - "[SX]物理攻击 +100"
       4:
         - "[SX]生命上限 +50"
+
+SuitPassives:
+  "test":
+    beAttack:
+      '[console]say 测试被攻击<playerName> <suitName>': 100
+    attacked:
+      '[op]say 测试攻击<playerName> <suitName>': 100
