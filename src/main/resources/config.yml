@@ -84,7 +84,9 @@ SuitPassives:
     attacked:
       #'指令': 概率
       '[op]say 测试攻击<playerName> <suitName>': 100
+    #当套装穿齐时执行的指令
     equipAll:
       - '[op]say <playerName>已经全部集齐<suitName>'
+    #当套装从穿齐转换为不齐时的指令
     changeFromAllEquipStats:
       - '[op]say <playerName>现在已经不再全部装配<suitName>'
