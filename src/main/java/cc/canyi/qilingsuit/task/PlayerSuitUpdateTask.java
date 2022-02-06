@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.serverct.ersha.jd.AttributeAPI;
 import org.serverct.ersha.jd.C;
+import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,11 +45,11 @@ public class PlayerSuitUpdateTask implements Runnable {
             HashMap<Suit, List<String>> playerEquipSuitMap = EquipmentUtils.getSuitAndPartNameByPlayer(player);
 
             playerEquipSuitMap.forEach((suit, parts) -> {
-                if(parts.size() == suit.getContainPart().size() && factory_cache.get(player).getPlayerEquipSuitMap().getOrDefault(suit, new ArrayList<>()).size() != suit.getContainPart().size()) {
+                if(factory_cache.containsKey(player) && parts.size() == suit.getContainPart().size() && factory_cache.get(player).getPlayerEquipSuitMap().getOrDefault(suit, new ArrayList<>()).size() != suit.getContainPart().size()) {
                     //全满 且是第一次全满 缓存不是全满 call event
                     QiLingSuitEquipAllEvent event = new QiLingSuitEquipAllEvent(player, suit);
                     Bukkit.getPluginManager().callEvent(event);
-                }else if(parts.size() < suit.getContainPart().size() && factory_cache.get(player).getPlayerEquipSuitMap().getOrDefault(suit, new ArrayList<>()).size() == suit.getContainPart().size()) {
+                }else if(factory_cache.containsKey(player) && parts.size() < suit.getContainPart().size() && factory_cache.get(player).getPlayerEquipSuitMap().getOrDefault(suit, new ArrayList<>()).size() == suit.getContainPart().size()) {
                     //不全满 且缓存是全满 call event
                     QiLingSuitTakeoffFromAllEvent event = new QiLingSuitTakeoffFromAllEvent(player, suit);
                     Bukkit.getPluginManager().callEvent(event);
@@ -77,6 +78,7 @@ public class PlayerSuitUpdateTask implements Runnable {
             if(!factory.getApAttrList().isEmpty()) AttrUtils.addAP(player, factory);
             if(!factory.getBigAttrList().isEmpty()) AttrUtils.addBigAttr(player, factory);
             if(!factory.getSxAttrList().isEmpty()) AttrUtils.addSX(player, factory);
+            if(!factory.getIloAttrList().isEmpty()) AttrUtils.addILO(player, factory);
 
             //缓存用于读取目前玩家的套装加成
             factory_cache.put(player, new Cache(playerEquipSuitMap, factory));
@@ -92,6 +94,9 @@ public class PlayerSuitUpdateTask implements Runnable {
         }
         if (PluginUtils.pluginIsActive("BigAttribute")) {
             BigAttributeHooker.getAttrMap().remove(player);
+        }
+        if (PluginUtils.pluginIsActive("ItemLoreOrigin")) {
+            com.mchim.ItemLoreOrigin.API.AttributeAPI.removeItems(QiLingSuitPlugin.class, player.getUniqueId());
         }
     }
 }

@@ -42,6 +42,16 @@ public class AttrUtils {
             SXAttributeData data = SXAttribute.getApi().loadListData(attrFactory.getSxAttrList());
             SXAttribute.getApi().setEntityAPIData(QiLingSuitPlugin.class, player.getUniqueId(), data);
         }catch (ClassNotFoundException ignore){}
+    }
 
+    /**
+     * 生效玩家ILO属性
+     * @param player 玩家
+     */
+    public static void addILO(Player player, AttrFactory attrFactory) {
+        try{
+            Class.forName(com.mchim.ItemLoreOrigin.API.AttributeAPI.class.getName());
+            com.mchim.ItemLoreOrigin.API.AttributeAPI.addItem(QiLingSuitPlugin.class, player.getUniqueId(), PlayerUtils.generateItem(attrFactory.getIloAttrList()));
+        }catch (ClassNotFoundException ignore){}
     }
 }

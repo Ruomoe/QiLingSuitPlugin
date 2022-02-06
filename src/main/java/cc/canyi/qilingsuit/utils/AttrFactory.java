@@ -28,6 +28,8 @@ public class AttrFactory {
     private final List<String> sxAttrList = new ArrayList<>();
     @Getter
     private final List<String> apAttrList = new ArrayList<>();
+    @Getter
+    private final List<String> iloAttrList = new ArrayList<>();
     /**
      * 流式设置config原本Str
      * @param str config 原本Str
@@ -66,7 +68,7 @@ public class AttrFactory {
     public AttrFactory buildLoreOrEffect() {
         if (type == null) return this;
         //System.out.println("获取到 " + type);
-        if (Arrays.asList("BIGATTR", "SX", "AP").contains(type)) {
+        if (Arrays.asList("BIGATTR", "SX", "AP", "ILO").contains(type)) {
             lore = str.substring(type.length() + 2);
         } else if (type.equals("BUFF")) {
             String effectName = str.substring(type.length() + 2);
@@ -113,6 +115,13 @@ public class AttrFactory {
             case "AP": {
                 if (PluginUtils.pluginIsActive("AttributePlus")) {
                     apAttrList.add(lore);
+                    return returnSelfAndSetResult(true);
+                }
+                return returnSelfAndSetResult(false);
+            }
+            case "ILO": {
+                if (PluginUtils.pluginIsActive("ItemLoreOrigin")) {
+                    iloAttrList.add(lore);
                     return returnSelfAndSetResult(true);
                 }
                 return returnSelfAndSetResult(false);

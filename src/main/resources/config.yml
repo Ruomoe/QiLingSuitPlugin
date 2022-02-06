@@ -31,6 +31,7 @@ Suit:
       #[BIGATTR]攻击力10 -给玩家额外一条BigAttribute [攻击力10] 属性
       #[SX]攻击力10 -给玩家额外一条SX-Attribute [攻击力10] 属性
       #[AP]攻击力10 -给玩家额外一条AttributePlus [攻击力10] 属性
+      #[ILO]攻击力10 -给玩家额外一条ItemLoreOrigin [攻击力10] 属性
       1:
         - "[BUFF]速度1"
       2:

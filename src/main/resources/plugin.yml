@@ -1,7 +1,7 @@
 name: QiLingSuitPlugin
 main: cc.canyi.qilingsuit.QiLingSuitPlugin
-version: 1.0.2-BETA
-softdepend: [BigAttribute, SX-Attribute, AttributePlus, PlaceholderAPI, DragonCore]
+version: 1.0.4-BETA
+softdepend: [BigAttribute, SX-Attribute, AttributePlus, PlaceholderAPI, DragonCore, ItemLoreOrigin]
 author: CanYi
 commands:
   qilingsuit:
