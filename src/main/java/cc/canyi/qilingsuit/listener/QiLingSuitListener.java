@@ -1,6 +1,8 @@
 package cc.canyi.qilingsuit.listener;
 
 import cc.canyi.qilingsuit.QiLingSuitPlugin;
+import cc.canyi.qilingsuit.api.event.QiLingSuitEquipAllEvent;
+import cc.canyi.qilingsuit.api.event.QiLingSuitTakeoffFromAllEvent;
 import cc.canyi.qilingsuit.suit.Suit;
 import cc.canyi.qilingsuit.task.PlayerSuitUpdateTask;
 import cc.canyi.qilingsuit.utils.PlayerUtils;
@@ -65,4 +67,33 @@ public class QiLingSuitListener implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void equipAll(QiLingSuitEquipAllEvent event) {
+        Player player = event.getPlayer();
+        Suit suit = event.getSuit();
+        if(suit.getPassives().getEquipAll() != null) {
+            suit.getPassives().getEquipAll().forEach(command -> PlayerUtils.runCommand(player,
+                    command
+                            .replace("<playerName>", player.getName())
+                            .replace("<suitName>", suit.getName())
+                    )
+            );
+        }
+    }
+
+    @EventHandler
+    public void takeoffEquipFromAll(QiLingSuitTakeoffFromAllEvent event) {
+        Player player = event.getPlayer();
+        Suit suit = event.getSuit();
+        if(suit.getPassives().getTakeoffFromAll() != null) {
+            suit.getPassives().getTakeoffFromAll().forEach(command -> PlayerUtils.runCommand(player,
+                            command
+                                    .replace("<playerName>", player.getName())
+                                    .replace("<suitName>", suit.getName())
+                    )
+            );
+        }
+    }
+
 }

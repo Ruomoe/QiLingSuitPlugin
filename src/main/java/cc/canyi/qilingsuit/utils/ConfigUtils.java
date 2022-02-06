@@ -69,6 +69,12 @@ public class ConfigUtils {
                 }
                 passivesBuilder.attacked(attack);
             }
+            if (config.get("SuitPassives." + suitConfigName + ".equipAll") != null) {
+                passivesBuilder.equipAll(config.getStringList("SuitPassives." + suitConfigName + ".equipAll"));
+            }
+            if (config.get("SuitPassives." + suitConfigName + ".changeFromAllEquipStats") != null) {
+                passivesBuilder.takeoffFromAll(config.getStringList("SuitPassives." + suitConfigName + ".changeFromAllEquipStats"));
+            }
 
             Suit suit = new Suit(suitName, containPart, partNeedLoreMap, isExtendsAttr, attrMap, passivesBuilder.build());
             SuitManager.addSuit(suitConfigName, suit);

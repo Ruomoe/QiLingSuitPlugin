@@ -84,3 +84,7 @@ SuitPassives:
     attacked:
       #'指令': 概率
       '[op]say 测试攻击<playerName> <suitName>': 100
+    equipAll:
+      - '[op]say <playerName>已经全部集齐<suitName>'
+    changeFromAllEquipStats:
+      - '[op]say <playerName>现在已经不再全部装配<suitName>'

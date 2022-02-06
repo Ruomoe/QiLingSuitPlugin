@@ -1,6 +1,8 @@
 package cc.canyi.qilingsuit.task;
 
 import cc.canyi.qilingsuit.QiLingSuitPlugin;
+import cc.canyi.qilingsuit.api.event.QiLingSuitEquipAllEvent;
+import cc.canyi.qilingsuit.api.event.QiLingSuitTakeoffFromAllEvent;
 import cc.canyi.qilingsuit.hooker.BigAttributeHooker;
 import cc.canyi.qilingsuit.suit.Suit;
 import cc.canyi.qilingsuit.utils.*;
@@ -14,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.serverct.ersha.jd.AttributeAPI;
 import org.serverct.ersha.jd.C;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,6 +42,19 @@ public class PlayerSuitUpdateTask implements Runnable {
             clearAllAttribute(player);
 
             HashMap<Suit, List<String>> playerEquipSuitMap = EquipmentUtils.getSuitAndPartNameByPlayer(player);
+
+            playerEquipSuitMap.forEach((suit, parts) -> {
+                if(parts.size() == suit.getContainPart().size() && factory_cache.get(player).getPlayerEquipSuitMap().getOrDefault(suit, new ArrayList<>()).size() != suit.getContainPart().size()) {
+                    //全满 且是第一次全满 缓存不是全满 call event
+                    QiLingSuitEquipAllEvent event = new QiLingSuitEquipAllEvent(player, suit);
+                    Bukkit.getPluginManager().callEvent(event);
+                }else if(parts.size() < suit.getContainPart().size() && factory_cache.get(player).getPlayerEquipSuitMap().getOrDefault(suit, new ArrayList<>()).size() == suit.getContainPart().size()) {
+                    //不全满 且缓存是全满 call event
+                    QiLingSuitTakeoffFromAllEvent event = new QiLingSuitTakeoffFromAllEvent(player, suit);
+                    Bukkit.getPluginManager().callEvent(event);
+                }
+            });
+
             List<String> strAttrs = EquipmentUtils.getStrAttrsBySuitAndPartMap(playerEquipSuitMap);
             AttrFactory factory = AttrStringUtils.getAttrFactory();
             for (String str : strAttrs) {
