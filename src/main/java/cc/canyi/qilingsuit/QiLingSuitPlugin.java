@@ -2,6 +2,7 @@ package cc.canyi.qilingsuit;
 
 import cc.canyi.qilingsuit.api.QiLingSuitPapi;
 import cc.canyi.qilingsuit.command.QiLingSuitCommands;
+import cc.canyi.qilingsuit.gui.QiLingSuitStatsGui;
 import cc.canyi.qilingsuit.listener.QiLingSuitListener;
 import cc.canyi.qilingsuit.task.PlayerSuitUpdateTask;
 import cc.canyi.qilingsuit.utils.AttrStringUtils;
@@ -55,6 +56,7 @@ public class QiLingSuitPlugin extends JavaPlugin {
 
         //Register listener
         Bukkit.getPluginManager().registerEvents(new QiLingSuitListener(), this);
+        Bukkit.getPluginManager().registerEvents(new QiLingSuitStatsGui.GuiListener(), this);
 
         if(PluginUtils.pluginIsActive("PlaceholderAPI")) {
             //Loaded PlaceholderAPI

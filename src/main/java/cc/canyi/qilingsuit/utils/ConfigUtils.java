@@ -4,6 +4,7 @@ import cc.canyi.qilingsuit.QiLingSuitPlugin;
 import cc.canyi.qilingsuit.suit.Suit;
 import cc.canyi.qilingsuit.suit.SuitManager;
 import cc.canyi.qilingsuit.suit.SuitPassives;
+import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -12,6 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ConfigUtils {
+    @Getter
+    private static String statsGuiName;
+
+
     /**
      * 初始化config
      */
@@ -30,6 +35,8 @@ public class ConfigUtils {
         QiLingSuitPlugin.setDebug(config.getBoolean("DebugMode"));
 
         QiLingSuitPlugin.setCheckTime(config.getLong("CheckPlayerEquipTime", 100));
+
+        statsGuiName = config.getString("StatsGuiName").replace("&", "§");
 
         for(String suitConfigName : config.getConfigurationSection("Suit").getKeys(false)) {
             String suitName = config.getString("Suit." + suitConfigName + ".Name");

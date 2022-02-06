@@ -2,6 +2,7 @@
 DebugMode: false
 #检查玩家装备时间 例如: 100 为 100tick 即 5s
 CheckPlayerEquipTime: 100
+StatsGuiName: "&a套装属性界面"
 Suit:
   #套装CONFIG名称 自定义即可
   test:

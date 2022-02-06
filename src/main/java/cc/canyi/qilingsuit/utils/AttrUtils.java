@@ -35,7 +35,7 @@ public class AttrUtils {
      * 生效玩家SX属性
      * @param player 玩家
      */
-    public static void addSX(Player player,  AttrFactory attrFactory) {
+    public static void addSX(Player player, AttrFactory attrFactory) {
         try{
             Class.forName(SXAttributeData.class.getName());
             Class.forName(SXAttribute.class.getName());
