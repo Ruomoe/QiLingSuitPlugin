@@ -4,13 +4,13 @@ import cc.canyi.qilingsuit.suit.Suit;
 import cc.canyi.qilingsuit.task.PlayerSuitUpdateTask;
 import cc.canyi.qilingsuit.utils.AttrStringUtils;
 import cc.canyi.qilingsuit.utils.EquipmentUtils;
+import cc.canyi.qilingsuit.utils.PluginUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class QiLingSuitPapi extends PlaceholderExpansion {
     public boolean canRegister() {
-        return Bukkit.getPluginManager().getPlugin(getPlugin()) != null;
+        return PluginUtils.pluginIsActive("PlaceholderAPI");
     }
 
     public String getAuthor() {

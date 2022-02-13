@@ -10,12 +10,10 @@ import cc.canyi.qilingsuit.utils.ConfigUtils;
 import cc.canyi.qilingsuit.utils.PluginUtils;
 import lombok.Getter;
 import lombok.Setter;
-import org.bstats.bukkit.Metrics;
+import cc.canyi.qilingsuit.api.bstats.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.serverct.ersha.jd.M;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class QiLingSuitPlugin extends JavaPlugin {
