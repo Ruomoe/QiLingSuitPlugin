@@ -10,8 +10,10 @@ import cc.canyi.qilingsuit.utils.ConfigUtils;
 import cc.canyi.qilingsuit.utils.PluginUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.serverct.ersha.jd.M;
 
 import java.util.Objects;
 import java.util.Random;
@@ -36,6 +38,12 @@ public class QiLingSuitPlugin extends JavaPlugin {
     @Getter
     private static final Random random = new Random();
 
+    @Getter
+    private static final int PLUGIN_ID = 14299;
+
+    @Getter
+    private static Metrics metrics;
+
     @Override
     public void onEnable() {
         //init instance
@@ -43,7 +51,6 @@ public class QiLingSuitPlugin extends JavaPlugin {
 
         root = this.getDataFolder().getAbsolutePath();
         this.saveDefaultConfig();
-
 
         //init buff HashMap
         AttrStringUtils.initBuffHashMap();
@@ -63,6 +70,11 @@ public class QiLingSuitPlugin extends JavaPlugin {
             boolean register = new QiLingSuitPapi().register();
             this.getLogger().info("PlaceholderAPI hooked " + (register ? "success" : "failed"));
         }
+
+        this.getLogger().info("Running Metrics...");
+        long time = System.currentTimeMillis();
+        metrics = new Metrics(this, PLUGIN_ID);
+        this.getLogger().info("Running Metrics success, cast " + (System.currentTimeMillis() - time) + "ms");
 
         this.getLogger().info("QiLingSuitPlugin Enabled.");
 
