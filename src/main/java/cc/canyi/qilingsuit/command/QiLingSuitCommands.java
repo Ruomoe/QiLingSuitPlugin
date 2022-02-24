@@ -1,45 +1,45 @@
 package cc.canyi.qilingsuit.command;
 
-import cc.canyi.qilingsuit.QiLingSuitPlugin;
-import cc.canyi.qilingsuit.gui.QiLingSuitStatsGui;
-import cc.canyi.qilingsuit.task.PlayerSuitUpdateTask;
-import cc.canyi.qilingsuit.utils.ConfigUtils;
-import org.bukkit.Bukkit;
+import cc.canyi.qilingsuit.command.sub.HelpCommand;
+import cc.canyi.qilingsuit.command.sub.ReloadCommand;
+import cc.canyi.qilingsuit.command.sub.StatsCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 
 public class QiLingSuitCommands implements CommandExecutor {
+    private static final HashMap<String, IQiLingSuitCommand> commands = new HashMap<>();
+
+    public static void addCommand(String path, IQiLingSuitCommand command) {
+        command.register(path);
+        commands.put(path, command);
+    }
+
+    /**
+     * 初始化所有指令
+     */
+    public static void init() {
+        addCommand("reload", new ReloadCommand());
+        addCommand("stats", new StatsCommand());
+        addCommand("help", new HelpCommand());
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("qilingsuit")) {
-            boolean isOp = sender.isOp();
-            if(args.length > 0){
-                String path = args[0];
-                switch (path) {
-                    case "stats": {
-                        if(sender instanceof Player) {
-                            Player player = (Player) sender;
-                            player.openInventory(QiLingSuitStatsGui.getStatsGui(player));
-                        }else sender.sendMessage("仅可以玩家执行!!");
-
-                        break;
-                    }
-                    case "reload": {
-                        if(isOp) {
-                            Bukkit.getScheduler().cancelTasks(QiLingSuitPlugin.getInstance());
-                            QiLingSuitPlugin.getTaskCache().setOver(true);
-                            ConfigUtils.updateAllSuitFromConfig();
-                            PlayerSuitUpdateTask suitUpdateTask = new PlayerSuitUpdateTask();
-                            QiLingSuitPlugin.setTaskCache(suitUpdateTask);
-                            Bukkit.getScheduler().runTaskTimer(QiLingSuitPlugin.getInstance(), QiLingSuitPlugin.getTaskCache(), 20L, QiLingSuitPlugin.getCheckTime());
-                            sender.sendMessage("§6[§a§l✔§6] §a插件全重载完成.");
-                        }
-                        break;
-                    }
-                }
+            if(args.length == 0) {
+                if(commands.containsKey("help"))
+                    commands.get("help").runCommand(args, sender);
+                return true;
+            }
+            String path = args[0];
+            if (commands.containsKey(path)) {
+                commands.get(path).runCommand(args, sender);
+                return true;
             }
         }
         return true;

@@ -44,26 +44,26 @@ public class EquipmentUtils {
      * @return 返回玩家穿戴的套装以及穿戴部位
      */
     public static HashMap<Suit, List<String>> getSuitAndPartNameByPlayer(Player player) {
-        ItemStack[] stacks = new ItemStack[5];
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-                case 0:
-                    stacks[i] = player.getInventory().getHelmet();
-                    break;
-                case 1:
-                    stacks[i] = player.getInventory().getChestplate();
-                    break;
-                case 2:
-                    stacks[i] = player.getInventory().getLeggings();
-                    break;
-                case 3:
-                    stacks[i] = player.getInventory().getBoots();
-                    break;
-                case 4:
-                    stacks[i] = player.getItemInHand();
-                    break;
-            }
-        }
+        ItemStack[] stacks = getItemStackFromEquipment(player);
+//        for (int i = 0; i < 5; i++) {
+//            switch (i) {
+//                case 0:
+//                    stacks[i] = player.getInventory().getHelmet();
+//                    break;
+//                case 1:
+//                    stacks[i] = player.getInventory().getChestplate();
+//                    break;
+//                case 2:
+//                    stacks[i] = player.getInventory().getLeggings();
+//                    break;
+//                case 3:
+//                    stacks[i] = player.getInventory().getBoots();
+//                    break;
+//                case 4:
+//                    stacks[i] = player.getItemInHand();
+//                    break;
+//            }
+//        }
         HashMap<Suit, List<String>> playerEquipSuitMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
             ItemStack stack = stacks[i];
@@ -86,6 +86,35 @@ public class EquipmentUtils {
             }
         }
         return playerEquipSuitMap;
+    }
+
+    /**
+     * 获取装备栏以及手部ItemStack
+     * @param player 玩家
+     * @return ItemStack 数组
+     */
+    public static ItemStack[] getItemStackFromEquipment(Player player) {
+        ItemStack[] stacks = new ItemStack[5];
+        for (int i = 0; i < 5; i++) {
+            switch (i) {
+                case 0:
+                    stacks[i] = player.getInventory().getHelmet();
+                    break;
+                case 1:
+                    stacks[i] = player.getInventory().getChestplate();
+                    break;
+                case 2:
+                    stacks[i] = player.getInventory().getLeggings();
+                    break;
+                case 3:
+                    stacks[i] = player.getInventory().getBoots();
+                    break;
+                case 4:
+                    stacks[i] = player.getItemInHand();
+                    break;
+            }
+        }
+        return stacks;
     }
 
 
@@ -123,5 +152,22 @@ public class EquipmentUtils {
                 return "手部";
         }
         return "Unknown";
+    }
+
+    /**
+     * 返回是否是一个ItemStack
+     * @param stack 物品
+     * @return 是否是
+     */
+    public static boolean isItem(ItemStack stack) {
+        return stack != null && !stack.getType().equals(Material.AIR);
+    }
+    /**
+     * 返回是否不是一个ItemStack
+     * @param stack 物品
+     * @return 是否不是
+     */
+    public static boolean isNotItem(ItemStack stack) {
+        return !isItem(stack);
     }
 }

@@ -4,6 +4,7 @@ import cc.canyi.qilingsuit.api.QiLingSuitPapi;
 import cc.canyi.qilingsuit.command.QiLingSuitCommands;
 import cc.canyi.qilingsuit.gui.QiLingSuitStatsGui;
 import cc.canyi.qilingsuit.listener.QiLingSuitListener;
+import cc.canyi.qilingsuit.suit.SuitLoreSetting;
 import cc.canyi.qilingsuit.task.PlayerSuitUpdateTask;
 import cc.canyi.qilingsuit.utils.AttrStringUtils;
 import cc.canyi.qilingsuit.utils.ConfigUtils;
@@ -42,6 +43,10 @@ public class QiLingSuitPlugin extends JavaPlugin {
     @Getter
     private static Metrics metrics;
 
+    @Getter
+    @Setter
+    private static SuitLoreSetting suitLoreSetting;
+
     @Override
     public void onEnable() {
         //init instance
@@ -58,6 +63,8 @@ public class QiLingSuitPlugin extends JavaPlugin {
 
         //Register bukkit command
         Bukkit.getPluginCommand("qilingsuit").setExecutor(new QiLingSuitCommands());
+        //init commands
+        QiLingSuitCommands.init();
 
         //Register listener
         Bukkit.getPluginManager().registerEvents(new QiLingSuitListener(), this);

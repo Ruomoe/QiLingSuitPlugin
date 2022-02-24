@@ -1,0 +1,45 @@
+#套装名称
+Name: "测试套装"
+SuitContain:
+  #本套套装有什么部位 这里写多少 下方SuitItemNeedLore需要写多少
+  - "手部"
+  - "头部"
+  - "胸部"
+  - "腿部"
+  - "脚部"
+SuitItemNeedLore:
+  # 判断玩家穿有套装的lore
+  "手部": "太阳神套装手部"
+  "头部": "太阳神套装头部"
+  "胸部": "太阳神套装胸部"
+  "腿部": "太阳神套装腿部"
+  "脚部": "太阳神套装脚部"
+SuitAttr:
+  #是否继承之前属性 比如他穿了两套 是否 获得穿了一套的属性
+  ExtendsAttr: true
+  #[属性类型][属性][等级]
+  #例子:
+  #[BUFF]速度1 -获得速度1buff
+  #[BIGATTR]攻击力10 -给玩家额外一条BigAttribute [攻击力10] 属性
+  #[SX]攻击力10 -给玩家额外一条SX-Attribute [攻击力10] 属性
+  #[AP]攻击力10 -给玩家额外一条AttributePlus [攻击力10] 属性
+  3:
+    - "[SX]物理攻击 +100"
+  4:
+    - "[SX]生命上限 +50"
+#[console]开头表示后台执行 [op]开头表示以OP身份执行 什么都不加即玩家普通执行
+SuitPassives:
+  #被攻击时
+  beAttack:
+      #'指令': 概率
+    '[console]say 测试被攻击<playerName> <suitName>': 100
+  #主动攻击时
+  attacked:
+      #'指令': 概率
+    '[op]say 测试攻击<playerName> <suitName>': 100
+  #当套装穿齐时执行的指令
+  equipAll:
+    - '[op]say <playerName>已经全部集齐<suitName>'
+  #当套装从穿齐转换为不齐时的指令
+  changeFromAllEquipStats:
+    - '[op]say <playerName>现在已经不再全部装配<suitName>'

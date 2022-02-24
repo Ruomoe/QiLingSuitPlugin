@@ -4,7 +4,7 @@ plugins {
 }
 apply plugin: 'com.github.johnrengelman.shadow'
 group 'cc.canyi'
-version '1.0.4-BETA'
+version '2.0.0-BETA'
 
 repositories {
     mavenCentral()
@@ -21,6 +21,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.yaml:snakeyaml:1.29'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     //annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
     compileOnly files('libs/bukkit-latest.jar')

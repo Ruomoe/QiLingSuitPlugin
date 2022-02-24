@@ -13,9 +13,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.serverct.ersha.jd.AttributeAPI;
-import org.serverct.ersha.jd.C;
-import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,8 +81,26 @@ public class PlayerSuitUpdateTask implements Runnable {
 
             //缓存用于读取目前玩家的套装加成
             factory_cache.put(player, new Cache(playerEquipSuitMap, factory));
+
+            //更新Lore
+            if(QiLingSuitPlugin.getSuitLoreSetting().isEnable()) updatePlayerEquipmentStack(player);
         });
     }
+
+    /**
+     * 更新套装属性lore 未完成...
+     * @param player
+     */
+    public void updatePlayerEquipmentStack(Player player) {
+        ItemStack[] equips = EquipmentUtils.getItemStackFromEquipment(player);
+        for(int i = 0; i < 5; i++) {
+            ItemStack stack = equips[i];
+            if(EquipmentUtils.isItem(stack)) {
+
+            }
+        }
+    }
+
 
     public void clearAllAttribute(Player player) {
         if (PluginUtils.pluginIsActive("SX-Attribute")) {
