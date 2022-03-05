@@ -40,7 +40,7 @@ public class PlayerSuitUpdateTask implements Runnable {
         if(over) return;
         Bukkit.getOnlinePlayers().forEach(player -> {
             //Clear player attribute
-            clearAllAttribute(player);
+            AttrUtils.clearAllAttribute(player);
 
             HashMap<Suit, List<String>> playerEquipSuitMap = EquipmentUtils.getSuitAndPartNameByPlayer(player);
 
@@ -85,18 +85,4 @@ public class PlayerSuitUpdateTask implements Runnable {
         });
     }
 
-    public void clearAllAttribute(Player player) {
-        if (PluginUtils.pluginIsActive("SX-Attribute")) {
-            SXAttribute.getApi().removeEntityAPIData(QiLingSuitPlugin.class, player.getUniqueId());
-        }
-        if (PluginUtils.pluginIsActive("AttributePlus")) {
-            AttributeAPI.deleteAttribute(player, "QiLingSuitPlugin");
-        }
-        if (PluginUtils.pluginIsActive("BigAttribute")) {
-            BigAttributeHooker.getAttrMap().remove(player);
-        }
-        if (PluginUtils.pluginIsActive("ItemLoreOrigin")) {
-            com.mchim.ItemLoreOrigin.API.AttributeAPI.removeItems(QiLingSuitPlugin.class, player.getUniqueId());
-        }
-    }
 }

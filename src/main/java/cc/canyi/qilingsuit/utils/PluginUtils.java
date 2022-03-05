@@ -1,6 +1,7 @@
 package cc.canyi.qilingsuit.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 
 public class PluginUtils {
     /**
@@ -10,5 +11,9 @@ public class PluginUtils {
      */
     public static boolean pluginIsActive(String pluginName) {
         return Bukkit.getPluginManager().getPlugin(pluginName) != null;
+    }
+
+    public static Plugin getPlugin(String pluginName) {
+        return Bukkit.getPluginManager().getPlugin(pluginName);
     }
 }
