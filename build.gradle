@@ -28,6 +28,7 @@ dependencies {
     compileOnly files('libs/BigAttributeVReload-1.0.jar')
     compileOnly files('libs/AttributePlus.jar')
     compileOnly files('libs/SX-Attribute.jar')
+    compileOnly files('libs/SX-Attribute_2.0.jar')
     compileOnly files('libs/PlaceholderAPI-2.10.4.jar')
     compileOnly files('libs/[插件]DragonCore-2.4.7.jar')
     compileOnly files('libs/ilo[多功能属性]ItemLoreOrigin.jar')
